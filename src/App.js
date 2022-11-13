@@ -53,20 +53,22 @@ class App extends React.Component{
 
 
   render(){
-    //var self = this
     var or = this.state.nameorigins
     return (
       <div className="App-header">
         <header>
           <div className="header">Name Origin</div>
+          <div className="header description">
+          This react app uses an api to tell you the possible orgins of a name. 
+          It will start to display results as you type in.
+          </div>
         </header>
         <div className='form-wrapper'>
         <form onSubmit={this.handleSubmit} id="form">
               <div>
                 <input onChange={this.handleChange} value={this.state.name} className="form-control" id="title" name='namesearched' type="text" placeholder='Search name here'/>
-                {/* <input id="submit" className="btn btn-warning" type="submit"/> */}
               </div>
-          </form>
+        </form>
         </div>
 
         <div id="list-wrapper">
