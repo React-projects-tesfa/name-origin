@@ -9,7 +9,7 @@ class App extends React.Component{
       nameorigins : [],
       name : '',
     }
-    this.fetchNameOrign = this.fetchNameOrign.bind(this)
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   };
@@ -51,42 +51,38 @@ class App extends React.Component{
       )
   }
 
-  fetchNameOrign(name) {
-    console.log('fetching ', name);
-  }
-
 
   render(){
     //var self = this
     var or = this.state.nameorigins
-    var origins = [1,2,3]
     return (
       <div className="App-header">
-        <div className=''>
+        <header>
+          <div className="header">Name Origin</div>
+        </header>
+        <div className='form-wrapper'>
         <form onSubmit={this.handleSubmit} id="form">
-              <div style={{flex: 6}}>
+              <div>
                 <input onChange={this.handleChange} value={this.state.name} className="form-control" id="title" name='namesearched' type="text" placeholder='Search name here'/>
                 {/* <input id="submit" className="btn btn-warning" type="submit"/> */}
               </div>
-        </form>
-      </div>
+          </form>
+        </div>
 
         <div id="list-wrapper">
         {or.map(function(origins, index){
               return(
-                <div key={index} className="task-wrapper flex-wrapper">
+                <div key={index} className="task-wrapper">
                 
-                <div style={{flex:1}}>
-                  <button className="btn btn-sm btn-outline-info disabled"> {origins.country_id}</button>
-                </div>
-                <div style={{flex:1}}>
-                  <button className="btn btn-sm btn-outline-warning disabled">{origins.probability*100} %</button>
+                <div>
+                  <button className="btn btn-sm btn-outline-info disabled country">{index+1}. {origins.country_id} </button>
+                  <button className="btn btn-sm btn-outline-warning disabled probability">{Math.round(origins.probability*100)} %</button>
                 </div>
               </div>
               )
             })}
             
-            </div>
+          </div>
 
 
 
