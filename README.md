@@ -2,7 +2,7 @@
 Name Origin is a web app that uses an api from a machine learning algorithm to displays the probably origin of a name and its probably accuracy.
 
 # Demo
-[Try it out here](https://nameorigins.netlify.app/)
+[Link to name origin (v.1.0.0)](https://nameorigins.netlify.app/)
 
 # Getting started with Name Origin
 
