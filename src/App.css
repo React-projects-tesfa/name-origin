@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .header {
   color: rgb(149, 192, 163);
   justify-content: center;
@@ -22,10 +26,23 @@
 .form-wrapper , .task-wrapper{
   justify-content: center;
   display: flex;
-  background-color: #282c34;
   margin-top: 30px;
 }
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
+}
+
+.canvas-container {
+  height: 60vh;
+  width: 80vh;
+  background-color: rgb(255, 253, 240);
+}
+
+@media only screen and (max-width: 600px) {
+  .canvas-container {
+    background-color: lightblue;
+    width: 70vh;
+    height: 70vh;
+  }
 }

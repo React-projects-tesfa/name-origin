@@ -1,19 +1,21 @@
 import React from 'react'
 
-export default function OriginLists({nameOrigins}) {
+export default function OriginLists({nameOrigins, showMoreToggle, showMore, getCountryName, label}) {
   return (
-    <div id="list-wrapper">
+    <div className=' flex flex-col items-center'>
+      <div >
         {nameOrigins.map(function(origins, index){
                 return(
-                <div key={index} className="task-wrapper">
-                
+                <div key={index}>
                 <div>
-                    <button className="btn btn-sm btn-outline-info disabled country">{index+1}. {origins.country_id} </button>
-                    <button className="btn btn-sm btn-outline-warning disabled probability">{Math.round(origins.probability*100)} %</button>
+                  { index < 3 ? <p className='text-white text-2xl mt-2 '>{index+1}. {origins.country_id} {Math.round(origins.probability*100)}%</p> :""}
                 </div>
                 </div>
                 )
             })}
+       </div>
+
+       { nameOrigins.length ? <div onClick={showMoreToggle} className=' mt-3 w-30 h-12 text-white cursor-pointer bg-orange-500 p-2 rounded hover:bg-slate-400'><a>{showMore ? "Show Less" : "Show Detail"}</a></div>: ""}
     
     </div>
   )
