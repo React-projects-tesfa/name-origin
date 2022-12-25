@@ -1,6 +1,6 @@
 import React from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie, Line } from "react-chartjs-2";
+import { Pie} from "react-chartjs-2";
 import { useState } from 'react';
 import '../App.css';
 
@@ -56,12 +56,10 @@ export default function Graph({nameOrigins, labelsState}) {
     }
 
   return (
-    <div className=' mt-5 flex justify-center'>
-
+    <div>
         <article className="canvas-container">
               <Pie data={data} options={options}/>
         </article>
-
     </div>
   )
 }

@@ -8,7 +8,8 @@ export default function OriginLists({nameOrigins, showMoreToggle, showMore, getC
                 return(
                 <div key={index}>
                 <div>
-                  { index < 3 ? <p className='text-white text-2xl mt-2 '>{index+1}. {origins.country_id} {Math.round(origins.probability*100)}%</p> :""}
+                {/* {origins.country_id} */}
+                  { index < 3 ? <p className='text-white text-2xl mt-2 '>{index+1}. {label[index]} {Math.round(origins.probability*100)}%</p> :""}
                 </div>
                 </div>
                 )

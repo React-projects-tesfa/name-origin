@@ -5,7 +5,7 @@ import Graph from './components/Graph';
 import './App.css';
 
 export default function App() {
-  const [nameOrigins, setNameOrigins] = useState(['']);
+  const [nameOrigins, setNameOrigins] = useState([]);
   const [searchedName, setSearchedName] = useState('');
   const [showMore, setShowMore] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -68,12 +68,14 @@ export default function App() {
             <label>
             <input onChange={handleChange} value={searchedName} className="form-control" id="title" name='namesearched' type="text" placeholder='Search name here'/>
             </label>
-            <input className='text-white bg-green-400' type="submit" value="Submit" />
+            <input className='text-white bg-green-400 ml-2 p-2 rounded text-sm' type="submit" value="Look up" />
         </form>
       </div>
 
       <OriginLists nameOrigins={nameOrigins} showMoreToggle={toggleShowMore} showMore={showMore} getCountryName={getCountryName} label={labelsState}/>
+      <div className=' mt-5 flex flex-col items-center'>
       {showMore ? <Graph nameOrigins={nameOrigins} labelsState={labelsState}/> : ""}
+      </div>
       </div>
     </div>
   )
