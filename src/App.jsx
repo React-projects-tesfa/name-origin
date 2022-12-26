@@ -6,7 +6,6 @@ import './App.css';
 import Loading from './components/Loading';
 
 export default function App() {
-  console.log('here')
   const [nameOrigins, setNameOrigins] = useState([]);
   const [searchedName, setSearchedName] = useState('');
   const [showMore, setShowMore] = useState(false);
@@ -53,34 +52,45 @@ export default function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(labelsState)
+    //console.log(labelsState)
     setLabelsState(labelsState => []);
     var url = `https://api.nationalize.io/?name=${searchedName}`
-    console.log('here', searchedName)
     setShowMore(false)
     getNameOrigins(url)
   }
 
   return (
     <div className={darkMode ? 'dark': ""}>
-      <div className=' bg-gradient-to-b from-teal-900 to-teal-800 min-h-screen dark:bg-gray-700'>
+      <div className=' flex flex-col justify-between bg-gradient-to-b from-teal-900 to-teal-800 min-h-screen dark:bg-gray-700'>
+      <div>
       <Header toggle={toggleDarkMode}/>
       <div className='form-wrapper'>
         <form onSubmit={handleSubmit} id="form">
             <label>
             <input onChange={handleChange} value={searchedName} className="form-control" id="title" name='namesearched' type="text" placeholder='Search name here'/>
             </label>
-            <input className='text-white bg-green-400 ml-2 p-2 rounded text-sm' type="submit" value="Look up" />
+            <input className='text-white bg-teal-600 ml-2 p-2 rounded hover:bg-teal-500' type="submit" value="Look up" />
         </form>
       </div>
 
       { loadingCountryName ? 
-       <Loading />:
+       <Loading loading={loadingCountryName} />:
       <OriginLists nameOrigins={nameOrigins} showMoreToggle={toggleShowMore} showMore={showMore} label={labelsState} loadingCountryName={loadingCountryName}/> 
         }
       <div className=' mt-5 flex flex-col items-center'>
       {showMore ? <Graph nameOrigins={nameOrigins} labelsState={labelsState}/> : ""}
       </div>
+      </div>
+
+
+      <div>
+        <footer>
+        <hr className=" border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-6" />
+        <span className="block text-sm text-white ml-3 sm:text-center ">© 2022 <a href="https://tesfatsionshiferaw.netlify.app/" className="hover:text-wh">Tesfatsion Shiferaw™</a>. All Rights Reserved.
+        </span>
+        </footer>
+      </div>
+
       </div>
     </div>
   )

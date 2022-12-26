@@ -9,7 +9,7 @@ export default function Header({toggle}) {
       <nav className='py-10 mb-2 flex'>
             <h1 className=' text-white text-6xl font-burtons dark:text-white'>Name Origin</h1>
             {/* <BsFillMoonStarsFill onClick={toggle} className=' ml-4 text-3xl flex cursor-pointer dark:text-white'/> */}
-            <AiFillGithub className=' ml-4 text-3xl text-gray-50 flex cursor-pointer animate-bounce hover:text-black hover:translate-y-1' />
+            <a href='https://github.com/Tesfa-eth/name-origin'><AiFillGithub className=' ml-4 text-3xl text-gray-50 flex cursor-pointer animate-bounce hover:text-teal-400 hover:translate-y-1' /></a>
       </nav>
               <div className=" text-lg text-gray-100 dark:text-yellow-400 ">
               Name Origin is a web app that uses an api from <a className="text-gray-400 hover:text-teal-300" href="https://nationalize.io/">nationalize.io</a> to displays the probably origin of a name and its probably accuracy.
