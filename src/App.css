@@ -42,7 +42,7 @@
 @media only screen and (max-width: 600px) {
   .canvas-container {
     background-color: lightblue;
-    width: 70vh;
+    width: 30vh;
     height: 70vh;
   }
 }

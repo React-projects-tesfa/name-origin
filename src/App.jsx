@@ -10,41 +10,38 @@ export default function App() {
   const [showMore, setShowMore] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [labelsState, setLabelsState] = useState([])
+  const [loadingCountryName, setLoadingCountryName] = useState(true)
 
   const getCountryName = (countrycodes) =>{
-    //console.log(countrycodes)
-    const labelTempStore = []
+    setLoadingCountryName(true)
     for (let i = 0; i < countrycodes.length; i++) {
-      var country_api_url = `https://restcountries.com/v3.1/alpha/${countrycodes[i].country_id}`
-      fetch(country_api_url)
-          //.then(res => res.json())
-          .then(data => data.json())
-          .then(data => {
-            console.log(data[0].name.common)
-            labelTempStore.push(data[0].name.common)
-          })
-    }
-    setLabelsState(labelTempStore)
+      console.log("finding")
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", `https://restcountries.com/v3.1/alpha/${countrycodes[i].country_id}`, [false]);
+      xhr.send()
+      xhr.onload = function() {
+       const countryName = JSON.parse(xhr.response)[0].name.common
+       setLabelsState(labelsState => [...labelsState, countryName]);
+      };
+  }
+  setLoadingCountryName(false)
   }
   const getNameOrigins = (url) => {
     fetch(url)
     .then(response => response.json())
     .then(
       data => {
-        console.log(data.country)
         setNameOrigins(data.country)
         getCountryName(data.country)
-      }
-      )
+      })
   }
 
   const handleChange = (e) => {
-    console.log(searchedName)
     setSearchedName(e.target.value)
+    e.preventDefault()
   }
 
   const toggleDarkMode = () =>{
-    //console.log(darkMode)
     setDarkMode(!darkMode)
   }
 
@@ -54,14 +51,17 @@ export default function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(labelsState)
+    setLabelsState(labelsState => []);
     var url = `https://api.nationalize.io/?name=${searchedName}`
     console.log('here', searchedName)
+    setShowMore(false)
     getNameOrigins(url)
   }
 
   return (
     <div className={darkMode ? 'dark': ""}>
-      <div className=' bg-gray-700 min-h-screen dark:bg-black'>
+      <div className=' bg-gradient-to-b from-teal-600 to-teal-800 min-h-screen dark:bg-gray-700'>
       <Header toggle={toggleDarkMode}/>
       <div className='form-wrapper'>
         <form onSubmit={handleSubmit} id="form">
@@ -72,7 +72,10 @@ export default function App() {
         </form>
       </div>
 
-      <OriginLists nameOrigins={nameOrigins} showMoreToggle={toggleShowMore} showMore={showMore} getCountryName={getCountryName} label={labelsState}/>
+      { loadingCountryName ? 
+      <div><h1 className=' text-white'>loading....</h1></div> :
+      <OriginLists nameOrigins={nameOrigins} showMoreToggle={toggleShowMore} showMore={showMore} getCountryName={getCountryName} label={labelsState}/> 
+        }
       <div className=' mt-5 flex flex-col items-center'>
       {showMore ? <Graph nameOrigins={nameOrigins} labelsState={labelsState}/> : ""}
       </div>
