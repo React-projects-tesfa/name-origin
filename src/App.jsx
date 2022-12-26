@@ -3,19 +3,21 @@ import Header from './components/Header';
 import OriginLists from './components/OriginLists';
 import Graph from './components/Graph';
 import './App.css';
+import Loading from './components/Loading';
 
 export default function App() {
+  console.log('here')
   const [nameOrigins, setNameOrigins] = useState([]);
   const [searchedName, setSearchedName] = useState('');
   const [showMore, setShowMore] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [labelsState, setLabelsState] = useState([])
-  const [loadingCountryName, setLoadingCountryName] = useState(true)
+  const [loadingCountryName, setLoadingCountryName] = useState(false)
 
   const getCountryName = (countrycodes) =>{
     setLoadingCountryName(true)
     for (let i = 0; i < countrycodes.length; i++) {
-      console.log("finding")
+      //XMLHttpRequest to make sych requests to get full country name from nationalize.io
       const xhr = new XMLHttpRequest();
       xhr.open("GET", `https://restcountries.com/v3.1/alpha/${countrycodes[i].country_id}`, [false]);
       xhr.send()
@@ -61,7 +63,7 @@ export default function App() {
 
   return (
     <div className={darkMode ? 'dark': ""}>
-      <div className=' bg-gradient-to-b from-teal-600 to-teal-800 min-h-screen dark:bg-gray-700'>
+      <div className=' bg-gradient-to-b from-teal-900 to-teal-800 min-h-screen dark:bg-gray-700'>
       <Header toggle={toggleDarkMode}/>
       <div className='form-wrapper'>
         <form onSubmit={handleSubmit} id="form">
@@ -73,8 +75,8 @@ export default function App() {
       </div>
 
       { loadingCountryName ? 
-      <div><h1 className=' text-white'>loading....</h1></div> :
-      <OriginLists nameOrigins={nameOrigins} showMoreToggle={toggleShowMore} showMore={showMore} getCountryName={getCountryName} label={labelsState}/> 
+       <Loading />:
+      <OriginLists nameOrigins={nameOrigins} showMoreToggle={toggleShowMore} showMore={showMore} label={labelsState} loadingCountryName={loadingCountryName}/> 
         }
       <div className=' mt-5 flex flex-col items-center'>
       {showMore ? <Graph nameOrigins={nameOrigins} labelsState={labelsState}/> : ""}

@@ -1,8 +1,10 @@
 import React from 'react'
+import Loading from './Loading'
 
-export default function OriginLists({nameOrigins, showMoreToggle, showMore, getCountryName, label}) {
+export default function OriginLists({nameOrigins, showMoreToggle, showMore, label, loadingCountryName}) {
   return (
     <div className=' flex flex-col items-center'>
+      
       <div >
         {nameOrigins.map(function(origins, index){
                 return(
