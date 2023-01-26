@@ -22,16 +22,19 @@ export default function OriginLists({
   //console.log(combinedArray);
 
   const NameOrigins = () => {
-    if (label.length < 2) return <>Loading...</>;
     return combinedArray.map((country, index) => (
       <div>
         {/* {country[1][0].name.common} {country[0].probability * 100} */}
         <div>
           {index < 3 ? (
             <p className="text-white text-2xl mt-2 ">
-              {index + 1}. {country[0][0].name.common}
-              {country[0][0].flag}
-              {Math.round(country[1].probability * 100)}%
+              <span>
+                {index + 1}. {country[0][0].name.common}{" "}
+              </span>
+              <span>{country[0][0].flag}</span>
+              <span className="ml-3 text-3xl">
+                {Math.round(country[1].probability * 100)}%
+              </span>
             </p>
           ) : (
             ""
